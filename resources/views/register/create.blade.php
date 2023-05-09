@@ -38,6 +38,3 @@
         </main>
     </section>
 @endsection
-<!-- help lmao me watching these laravel courses ma then this teacher teaching form validation d
-he do backend for every form input d but forgot to add one email input bar at front end
-then he is wenrou wenrou aneh jianghua eh suddenly he noticed he no put d use angry eh tone say u saw this the whole time yet u said *nothing* -->
