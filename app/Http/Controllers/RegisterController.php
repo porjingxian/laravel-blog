@@ -12,16 +12,19 @@ class RegisterController extends Controller
     }
     public function store(){
         $attributes=request()->validate([
-            'name'=>'required',
-            'username'=>'required',
-            'email'=>'required|email',
-            'password'=>'required'
+            'name'=>'required|max:60|min:3',
+            'username'=>'required|max:60|min:3|unique:users,username',
+            'email'=>'required|email|unique:users,email',
+            'password'=>'required|min:7|max:60'
         ]);
 
         $attributes['password']=bcrypt($attributes['password']);
 
-        User::create($attributes);
+        $user=User::create($attributes);
+    
+        auth()->login($user);
 
-        return redirect('/');
+        //flash message
+        return redirect('/')->with('success', 'Your account has been created!');
     }
 }
