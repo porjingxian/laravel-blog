@@ -6,29 +6,33 @@ use Illuminate\Validation\ValidationException;
 
 class SessionsController extends Controller
 {
-    public function create(){
-        return view('session.create');
+    public function create()
+    {
+        return view('sessions.create');
     }
 
-    public function store(){
+    public function store()
+    {
         $attributes = request()->validate([
-            'email'=> 'required|email',
-            'password'=>'required'
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
-        
-        if(! auth()->attempt($attributes)){
-            //auth failed
+
+        if (! auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email'=>'Your provided credentials could not be verified.'
+                'email' => 'Your provided credentials could not be verified.'
             ]);
         }
-        //attempt to authenticate & log user in
+
         session()->regenerate();
-        return redirect('/')->with('success','Welcome Back!');
+
+        return redirect('/')->with('success', 'Welcome Back!');
     }
 
-    public function destroy(){
+    public function destroy()
+    {
         auth()->logout();
-        return redirect('/')->with('success','Goodbye!');
+
+        return redirect('/')->with('success', 'Goodbye!');
     }
 }

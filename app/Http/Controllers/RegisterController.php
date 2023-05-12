@@ -17,9 +17,6 @@ class RegisterController extends Controller
             'email'=>'required|email|unique:users,email',
             'password'=>'required|min:7|max:60'
         ]);
-
-        $attributes['password']=bcrypt($attributes['password']);
-
         $user=User::create($attributes);
     
         auth()->login($user);
